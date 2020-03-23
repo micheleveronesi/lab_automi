@@ -4,7 +4,6 @@
 #include <map>
 #include <vector>
 #define SINK_STATE -1
-#define FINAL_LOOP -2
 
 using namespace std;
 
