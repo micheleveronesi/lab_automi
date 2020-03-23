@@ -14,8 +14,8 @@ void AbstractDFA::reset() {
 bool AbstractDFA::isAccepting() {
     if(current_state==SINK_STATE)
         return false;
-    for(int s : final_states)        
-        if(current_state == s)
+    for(auto it=final_states.begin(); it!=final_states.end(); ++it)
+        if(current_state == *it)
             return true;
     return false;
 }

@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <map>
-#include <vector>
+#include <list>
 #define SINK_STATE -1
 
 using namespace std;
@@ -15,7 +15,7 @@ protected:
 	const int num_states;
     map<tpair, int> transitions;
 	int current_state;
-	vector<int> final_states;
+	list<int> final_states;
 	// assumiamo che lo stato iniziale sia sempre 0
 	// l'alfabeto è tutto ASCII
 	// gli stati vanno da 0 a num_states-1
