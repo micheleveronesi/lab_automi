@@ -8,7 +8,6 @@
 using namespace std;
 
 typedef std::pair<int,char> tpair; // transizione
-// int è lo stato in cui sei, char l'input
 
 class AbstractDFA {
 protected:
@@ -38,5 +37,5 @@ public:
 class CommentDFA : public AbstractDFA {
 public:
 	CommentDFA();
-    virtual void doStep(char letter);
+	virtual void doStep(char letter);
 };
