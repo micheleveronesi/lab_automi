@@ -14,8 +14,8 @@ void AbstractDFA::reset() {
 bool AbstractDFA::isAccepting() {
     if(current_state==SINK_STATE)
         return false;
-    for(auto it=final_states.begin(); it!=final_states.end(); ++it)
-        if(current_state == *it)
+    for(int it : final_states)
+        if(current_state == it)
             return true;
     return false;
 }
@@ -43,7 +43,8 @@ WordDFA::WordDFA(const string& word)
     final_states.push_back(num_states-1);
     for(int i=0; i < word.length(); ++i)
         transitions[tpair(i,word.at(i))] = i+1;
-    /* crea una transizione dallo stato i allo stato
+    /* 
+     * crea una transizione dallo stato i allo stato
      * i+1 per il carattere in posizione i della stringa 
      */
 }
@@ -67,9 +68,11 @@ void CommentDFA::doStep(char letter) {
         switch (current_state){
             case 2:
                 // rimango su stato 2
+                // current_state = 2
                 break;
             case 3:
                 // rimango su stato 3
+                // current_state = 3
                 break;
             case 4:
                 current_state = 3;
