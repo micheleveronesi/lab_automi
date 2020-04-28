@@ -1,0 +1,17 @@
+if(x - (10 % x))
+{
+    int x;
+    x = read();
+
+}
+else
+{
+    write("test write");
+   // x - (10 % x);
+  x= x<5;
+}
+
+while(x + (z % 3) < 3 - (x / 3))
+{
+    y=read();
+}

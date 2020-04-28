@@ -7,7 +7,7 @@ statement : decl ';' | assign ';' | loop | out ';' | branch | expr;
 
 decl      : 'int' ID ;
 assign    : ID '=' robj ;
-robj      : expr | in ;
+robj      : in | relation;
 out       : 'write' '(' wobj ')' ; 
 wobj      : expr | str ;
 str       : '"' .*? '"';
@@ -18,10 +18,8 @@ expr      : expr PLUS term | expr MINUS term | term ;
 term      : term MULT factor | term DIV factor | term MOD factor | factor ;
 factor    : '(' expr ')' | NUMBER | ID ;
 relation  : relation AND comp | relation OR comp | comp ;
-comp      : NOT eq | eq LT eq | eq LEQ eq | eq EQ eq | eq NEQ eq | eq GEQ eq | eq GT eq | eq ;
-eq        : '(' relation ')' | expr ;
-
-
+comp      : NOT eq | comp LT eq | comp LEQ eq | eq EQ eq | comp NEQ eq | comp GEQ eq | comp GT eq | eq ;
+eq        : '(' relation ')' | factor | expr ;
 
 EQ        : '==' ;
 LT        : '<' ;
