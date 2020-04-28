@@ -1,4 +1,4 @@
-if(x - (10 % x))
+if(x - 10 % x)
 {
     int x;
     x = read();
@@ -7,11 +7,11 @@ if(x - (10 % x))
 else
 {
     write("test write");
-   // x - (10 % x);
-  x= x<5;
+    y = x - (10 % x);
+    x= x - 5;
 }
 
-while(x + (z % 3) < 3 - (x / 3))
+while(1 && 1)
 {
     y=read();
 }

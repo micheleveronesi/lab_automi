@@ -3,23 +3,23 @@ grammar tinyc;
 start     : program EOF ;
 program   : statement | statement program ;
           
-statement : decl ';' | assign ';' | loop | out ';' | branch | expr;
+statement : decl ';' | assign ';' | loop | out ';' | branch;
 
 decl      : 'int' ID ;
 assign    : ID '=' robj ;
-robj      : in | relation;
+robj      : in | expr;
 out       : 'write' '(' wobj ')' ; 
 wobj      : expr | str ;
 str       : '"' .*? '"';
 in        : 'read' '(' ')' ;
-branch    : 'if' '(' relation ')' '{' program '}' | 'if' '(' relation ')' '{' program '}' 'else' '{' program '}' ; 
+branch    : 'if' '(' relation ')' '{' program '}' | 'if' '(' relation ')' '{' program '}' 'else' '{' program '}' ;
 loop      : 'while' '(' relation ')' '{' program '}';
 expr      : expr PLUS term | expr MINUS term | term ;
 term      : term MULT factor | term DIV factor | term MOD factor | factor ;
 factor    : '(' expr ')' | NUMBER | ID ;
 relation  : relation AND comp | relation OR comp | comp ;
-comp      : NOT eq | comp LT eq | comp LEQ eq | comp EQ eq | comp NEQ eq | comp GEQ eq | comp GT eq | eq ;
-eq        : '(' relation ')' | factor | expr ;
+comp      : NOT eq | eq LT eq | eq LEQ eq | eq EQ eq | eq NEQ eq | eq GEQ eq | eq GT eq | eq ;
+eq        : '(' relation ')' | expr ;
 
 EQ        : '==' ;
 LT        : '<' ;
