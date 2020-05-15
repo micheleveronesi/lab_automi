@@ -29,7 +29,7 @@ antlrcpp::Any runtimeVisitor::visitOut(tinycParser::OutContext *ctx) {
     { // TODO: implementare il caso stampa di una stringa (fatto)
         string value = ctx->STRING()->getText();  // ottiene la stringa con apici
         value.erase(0,1);  // cancella 1 carattere a partire dal carattere 0, i.e. il primo apice
-        value.erase(value.length()-1, 1);  // calcella 1 carattere a partire dall'ultimo carattere, i.e. l'ultimo apice
+        value.erase(value.length()-1, 1);  // cancella 1 carattere a partire dall'ultimo carattere, i.e. l'ultimo apice
         cout << value << endl;  // stampa la stringa senza apici
     }
     return NULL;
