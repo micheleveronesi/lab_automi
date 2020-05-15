@@ -25,14 +25,20 @@ antlrcpp::Any runtimeVisitor::visitOut(tinycParser::OutContext *ctx) {
         int value = visitExpr(ctx->expr());
         cout << value << endl;
     }
-    // TODO: implementare il caso stampa di una stringa 
+    else  // stampa stringa
+    { // TODO: implementare il caso stampa di una stringa (fatto)
+        string value = ctx->STRING()->getText();
+        cout << value << endl;
+    }
     return NULL;
 }
 
 antlrcpp::Any runtimeVisitor::visitInput(tinycParser::InputContext *ctx) {
     // TODO: implementa la lettura dell'input da tastiera
-    // il metodo deve ritornare un valore intero
-    return 0;
+    // il metodo deve ritornare un valore intero (fatto)
+    int value;
+    cin >> value;
+    return value;
 }
 
 
@@ -44,11 +50,18 @@ antlrcpp::Any runtimeVisitor::visitBranch(tinycParser::BranchContext *ctx) {
         visitProgram(ctx->program(0));
     } 
     // TODO: implementa l'esecuzione del ramo else (se presente) quando la guardia è falsa 
+    // (fatto)
+    else if(ctx->program(1) != nullptr)
+    {
+        visitProgram(ctx->program(1));
+    }
     return NULL;
 }
 
 antlrcpp::Any runtimeVisitor::visitLoop(tinycParser::LoopContext *ctx) {
-    // TODO: implementa l'esecuzione del ciclo while
+    // TODO: implementa l'esecuzione del ciclo while (fatto)
+    while(visitGuard(ctx->guard()))
+        visitProgram(ctx->program());
     return NULL;
 }
 
@@ -116,12 +129,38 @@ antlrcpp::Any runtimeVisitor::visitExpr(tinycParser::ExprContext *ctx) {
 antlrcpp::Any runtimeVisitor::visitGuard(tinycParser::GuardContext *ctx) {
     // TODO: implementa la valutazione di una espressione booleana
     // il metodo ritorna true se l'espressione è vera, false altrimenti
-    return true; 
+    // (fatto)
+    bool value = false;
+    if(ctx->relation())
+        value = visitRelation(ctx->relation());
+    else if(ctx->NOT())
+            value = !(visitGuard(ctx->guard(0)));
+    else if(ctx->AND())
+        value = visitGuard(ctx->guard(0)) && visitGuard(ctx->guard(1));
+    else if(ctx->OR())
+        value = visitGuard(ctx->guard(0)) || visitGuard(ctx->guard(1));
+    else //if(ctx->guard().size() == 1) // parentesi
+        value = visitGuard(ctx->guard(0));
+    return value; 
 }
 
 antlrcpp::Any runtimeVisitor::visitRelation(tinycParser::RelationContext *ctx) {
     // TODO: implementa la valutazione di un confronto 
     // il metodo ritorna true se il confronto è vero, false altrimenti
-    return true;
+    // (fatto)
+    bool value = false;
+    int left = visitExpr(ctx->expr(0)), right = visitExpr(ctx->expr(1));
+    if(ctx->LT())
+        value = left < right;
+    else if(ctx->LEQ())
+        value = left <= right;
+    else if(ctx->EQ())
+        value = left == right;
+    else if(ctx->NEQ())
+        value = left != right;
+    else if(ctx->GEQ())
+        value = left >= right;
+    else if(ctx->GT())
+        value = left > right;
+    return value;
 }
-

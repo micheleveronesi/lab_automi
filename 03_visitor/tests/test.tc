@@ -1,0 +1,8 @@
+if(2 < 32)
+{
+    write("true");
+}
+else
+{
+    write("false");
+}

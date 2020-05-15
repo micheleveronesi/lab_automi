@@ -12,5 +12,5 @@ while ( x != y ) {
     }
 }
 // Output result
-write("GCD: ");
+//write("GCD: ");
 write(x);

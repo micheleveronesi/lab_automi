@@ -1,5 +1,5 @@
 int x; int y;
-x = 6;
+x = 2;
 y = 4;
 if (x <= y) {
 	write(y);
