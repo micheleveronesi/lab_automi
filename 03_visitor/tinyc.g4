@@ -12,9 +12,9 @@ input     : 'read' '(' ')' ;
 branch    : 'if' '(' guard ')'  '{' program '}'
           | 'if' '(' guard ')' '{' program '}' 'else' '{' program '}' ;
 loop      : 'while' '(' guard ')' '{' program '}' ;
-expr      : NUMBER | ID | input | expr PLUS expr | expr MINUS expr | expr TIMES expr 
-          | expr DIV expr | expr MOD expr | '(' expr ')' ;
-guard     : relation | NOT '(' guard ')' | guard AND guard | guard OR guard | '(' guard ')';
+expr      : expr MOD expr | expr DIV expr | expr TIMES expr | expr MINUS expr | expr PLUS expr |
+          | '(' expr ')' | NUMBER | ID | input ;
+guard     : NOT '(' guard ')' | guard AND guard | guard OR guard | '(' guard ')' | relation ;
 relation  : expr LT expr | expr LEQ expr | expr EQ expr | expr NEQ expr | expr GEQ expr | expr GT expr ;
 
 MINUS     : '-' ;
@@ -38,4 +38,3 @@ COMMENT   : '/*' .*? '*/' -> skip ; // .*? matches anything until the first */
 LINE_COMMENT : '//' ~[\r\n]* -> skip ;
 WS        : [ \n\t\r]+ -> skip;
 ErrorChar : . ;
-
